@@ -23,8 +23,7 @@ public class GeolocationService {
   @Inject GeoIP2Repository geoIP2Repository;
 
   /**
-   * Calls the GeoIP2Repository in order to get the geolocalization entity associated to an IP
-   * address address
+   * Calls the GeoIP2Repository in order to get the geolocation entity associated to an IP address
    *
    * @param ip an IP address
    * @return A geolocalization entity
@@ -36,10 +35,10 @@ public class GeolocationService {
   }
 
   /**
-   * Calls the GeoIP2Repository in order to get all the geolocalization associated with a list of ip
+   * Calls the GeoIP2Repository in order to get all the geolocation associated with a list of ip
    *
    * @param ipList
-   * @return A list of geolocaization entities
+   * @return A list of geolocation entities
    */
   public List<Geolocation> batchGetGeolocalization(List<String> ipList) {
     return ipList.stream()

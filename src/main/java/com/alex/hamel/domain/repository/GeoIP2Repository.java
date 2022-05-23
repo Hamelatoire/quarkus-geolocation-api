@@ -25,7 +25,7 @@ public class GeoIP2Repository {
           .orElse(721678);
   final String licenseKey =
       ConfigProvider.getConfig()
-          .getOptionalValue("geoip2.liscence.key", String.class)
+          .getOptionalValue("geoip2.licence.key", String.class)
           .orElse("JgUmqYYhJj0fmxB3");
   private WebServiceClient client;
 
@@ -36,10 +36,10 @@ public class GeoIP2Repository {
   }
 
   /**
-   * Lookup to the webservice and returns the geolocalization entity associated to an IP address
+   * Lookup to the webservice and returns the Geolocation entity associated to an IP address
    *
    * @param ip the IP address in string format
-   * @return the geolocalization that we received by reading the webservice using the IP address
+   * @return the Geolocation that we received by reading the webservice using the IP address
    */
   public Geolocation getGeolocalization(String ip) throws IOException, GeoIp2Exception {
     logger.info("fetching entity with the following ip: " + ip);

@@ -4,7 +4,7 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.Builder;
 import lombok.Getter;
 
-/** Entity model that is used to as the return type of the geolocation ressource */
+/** Entity model that is used to as the return type of the geolocation resource's methods */
 @Builder
 @Getter
 @RegisterForReflection

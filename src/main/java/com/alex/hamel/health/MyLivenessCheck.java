@@ -19,7 +19,10 @@ public class MyLivenessCheck implements HealthCheck {
 
   static {
     CONFIG_LIST.add("quarkus.http.port");
-    CONFIG_LIST.add("geoip2.database.file-path");
+    CONFIG_LIST.add("quarkus.swagger-ui.path");
+    CONFIG_LIST.add("quarkus.swagger-ui.always-include");
+    CONFIG_LIST.add("geoip2.account.id");
+    CONFIG_LIST.add("geoip2.licence.key");
   }
 
   @Override

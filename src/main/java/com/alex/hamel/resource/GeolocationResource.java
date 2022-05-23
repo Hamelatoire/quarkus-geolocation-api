@@ -1,4 +1,4 @@
-package com.alex.hamel.ressource;
+package com.alex.hamel.resource;
 
 import com.alex.hamel.domain.entities.Geolocation;
 import com.alex.hamel.errorhandling.CustomException;
@@ -20,16 +20,16 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * The geolocation ressource is where the routes of the geolocation api lives. We use the Jackson
+ * The geolocation resource is where the routes of the geolocation api lives. We use the Jackson
  * library to serialize and deserialize the application/json that is consumed or produced by this
  * api.
  */
-@Tag(name = "GeolocationRessource", description = "Api that return Geolocations from an IP address")
+@Tag(name = "GeolocationResource", description = "Api that return Geolocations from an IP address")
 @Path("/v1/geolocation")
 @Produces(MediaType.APPLICATION_JSON)
 @ApplicationScoped
-public class GeolocationRessource {
-  private static final Logger logger = Logger.getLogger(GeolocationRessource.class);
+public class GeolocationResource {
+  private static final Logger logger = Logger.getLogger(GeolocationResource.class);
   @Inject GeolocationService geolocationService;
 
   private void validateIP(String ip) {
