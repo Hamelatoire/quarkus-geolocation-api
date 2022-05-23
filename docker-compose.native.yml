@@ -1,0 +1,11 @@
+version: "1"
+
+services:
+  geolocation-service:
+    build:
+      context: .
+      dockerfile: src/main/docker/Dockerfile.native-micro
+    image: quay.io/quarkus/quarkus-micro-image:1.0
+    mem_limit: 128m
+    ports:
+      - "8080:8080"
