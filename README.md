@@ -50,7 +50,7 @@ The application can be packaged using:
 
 ## Running the app in a docker container
 
-Fortunately for me, Quarkus automatically made dockerfiles for me when I generated the project. Here is how to use the
+Fortunately for me, Quarkus automatically made dockerfiles when I generated the project. Here is how to use the
 fast jar version of the app.
 
 ```shell script
@@ -85,10 +85,10 @@ If you want to learn more about building native executables, please consult http
 
 ## What could be done better
 
-- The error handling does not really go in details for each error.
+- The error handling does not really go in details for every error.
 - I wasted a bunch of time trying to package the GEO2Lite database into the jar and never figured it out. If it had
   worked, the app would not have to do http calls to their service, and we could use caching on the database to make the
-  queries faster. It is still possible to use caching on services using quarkus but that way beyond the scope of this
+  queries faster. It is still possible to use caching on using quarkus but that way beyond the scope of this
   technical Test.
 - I could have gone above and beyond and make tests for every class, but I think that testing the endpoint is enough
   for this test. I used SonarQube to make sure I did not have any obvious code smell and got a code coverage of over
