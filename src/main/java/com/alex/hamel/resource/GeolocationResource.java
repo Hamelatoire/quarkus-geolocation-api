@@ -75,7 +75,7 @@ public class GeolocationResource {
       responseCode = "500",
       description = CustomExceptionCodes.ERROR_WHILE_USING_THE_WEB_SERVICE)
   public Response getGeolocations(List<String> ipList) {
-    ipList.stream().forEach(this::validateIP);
+    ipList.forEach(this::validateIP);
     List<Geolocation> geolocationList = null;
     geolocationList = geolocationService.batchGetGeolocalization(ipList);
     return Response.status(Response.Status.OK).entity(geolocationList).build();
