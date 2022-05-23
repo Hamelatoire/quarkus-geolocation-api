@@ -48,7 +48,7 @@ public class GeolocationRessource {
   @APIResponse(responseCode = "400", description = CustomExceptionCodes.BAD_IP)
   @APIResponse(
       responseCode = "500",
-      description = CustomExceptionCodes.ERROR_WHILE_READING_DATABASE)
+      description = CustomExceptionCodes.ERROR_WHILE_USING_THE_WEB_SERVICE)
   public Response getGeolocation(@PathParam("ip") String ip) {
     this.validateIP(ip);
     Geolocation geolocation = null;
@@ -56,10 +56,10 @@ public class GeolocationRessource {
       geolocation = geolocationService.getGeolocalization(ip);
     } catch (IOException e) {
       logger.error(e.getMessage());
-      throw new CustomException(CustomExceptionCodes.LOADING_DATABASE_INTO_MEMORY_FAILED);
+      throw new CustomException(CustomExceptionCodes.IO_ERROR_WHILE_USING_THE_WEB_SERVICE);
     } catch (GeoIp2Exception e) {
       logger.error(e.getMessage());
-      throw new CustomException(CustomExceptionCodes.ERROR_WHILE_READING_DATABASE);
+      throw new CustomException(CustomExceptionCodes.ERROR_WHILE_USING_THE_WEB_SERVICE);
     }
     return Response.status(Response.Status.OK).entity(geolocation).build();
   }
@@ -73,7 +73,7 @@ public class GeolocationRessource {
   @APIResponse(responseCode = "400", description = CustomExceptionCodes.BAD_IP)
   @APIResponse(
       responseCode = "500",
-      description = CustomExceptionCodes.ERROR_WHILE_READING_DATABASE)
+      description = CustomExceptionCodes.ERROR_WHILE_USING_THE_WEB_SERVICE)
   public Response getGeolocations(List<String> ipList) {
     ipList.stream().forEach(this::validateIP);
     List<Geolocation> geolocationList = null;

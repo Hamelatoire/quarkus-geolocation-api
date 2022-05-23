@@ -49,10 +49,11 @@ public class GeolocationService {
                 return geoIP2Repository.getGeolocalization(ip);
               } catch (IOException e) {
                 logger.error(e.getMessage());
-                throw new CustomException(CustomExceptionCodes.LOADING_DATABASE_INTO_MEMORY_FAILED);
+                throw new CustomException(
+                    CustomExceptionCodes.IO_ERROR_WHILE_USING_THE_WEB_SERVICE);
               } catch (GeoIp2Exception e) {
                 logger.error(e.getMessage());
-                throw new CustomException(CustomExceptionCodes.ERROR_WHILE_READING_DATABASE);
+                throw new CustomException(CustomExceptionCodes.ERROR_WHILE_USING_THE_WEB_SERVICE);
               }
             })
         .collect(Collectors.toList());

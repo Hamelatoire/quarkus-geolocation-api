@@ -22,9 +22,7 @@ class GeolocationRessourceTest {
         .body("ip", is("76.69.122.95"))
         .body("country", is("Canada"))
         .body("subdivision", is("Ontario"))
-        .body("city", is("Kingston"))
-        .body("postal", is("K7M"))
-        .body("location", is("Longitude: -76.585 Latitude: 44.2161"));
+        .body("city", is("Kingston"));
   }
 
   @Test
@@ -76,20 +74,12 @@ class GeolocationRessourceTest {
             is("Canada"),
             "[0].subdivision",
             is("Ontario"),
-            "[0].postal",
-            is("K7M"),
-            "[0].location",
-            is("Longitude: -76.585 Latitude: 44.2161"),
-            "[0].ip",
-            is("76.69.122.95"),
+            "[1].ip",
+            is("103.59.72.103"),
             "[1].country",
             is("India"),
             "[1].subdivision",
-            is("West Bengal"),
-            "[1].postal",
-            is("700054"),
-            "[1].location",
-            is("Longitude: 88.3832 Latitude: 22.518"));
+            is("West Bengal"));
   }
 
   @Test

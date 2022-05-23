@@ -1,8 +1,7 @@
 package com.alex.hamel.domain.repository;
 
 import com.alex.hamel.domain.entities.Geolocation;
-import com.maxmind.db.CHMCache;
-import com.maxmind.geoip2.DatabaseReader;
+import com.maxmind.geoip2.WebServiceClient;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.record.Country;
@@ -13,48 +12,40 @@ import org.eclipse.microprofile.config.ConfigProvider;
 import org.jboss.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.nio.file.Path;
 
-/** Repository that fetches data from the GeoIP2 database */
+/** Repository that fetches data from the GeoIP2 webservice */
 @ApplicationScoped
 public class GeoIP2Repository {
   private static final Logger logger = Logger.getLogger(GeoIP2Repository.class);
-
-  final String databaseFilePath =
+  final Integer accountId =
       ConfigProvider.getConfig()
-          .getOptionalValue("geoip2.database.file-path", String.class)
-          .orElse("src/main/resources/");
-  final String databaseFileName =
+          .getOptionalValue("geoip2.account.id", Integer.class)
+          .orElse(721678);
+  final String licenseKey =
       ConfigProvider.getConfig()
-          .getOptionalValue("geoip2.database.file-name", String.class)
-          .orElse("src/main/resources/");
+          .getOptionalValue("geoip2.liscence.key", String.class)
+          .orElse("JgUmqYYhJj0fmxB3");
+  private WebServiceClient client;
 
-  DatabaseReader reader;
-
-  public GeoIP2Repository() throws IOException {
-    Path databasePath = Path.of(databaseFilePath);
-    File file = databasePath.toAbsolutePath().resolve(databaseFileName).toFile();
-    synchronized (this) {
-      logger.info("Loading database into memory");
-      this.reader = new DatabaseReader.Builder(file).withCache(new CHMCache()).build();
-    }
-    logger.info("Loaded database into memory successfully");
+  public GeoIP2Repository() {
+    logger.info("Creating the web service client");
+    client = new WebServiceClient.Builder(accountId, licenseKey).host("geolite.info").build();
+    logger.info("Client created successfully");
   }
 
   /**
-   * Reads the GeoIP2 database and returns the geolocalization entity associated to an IP address
+   * Lookup to the webservice and returns the geolocalization entity associated to an IP address
    *
    * @param ip the IP address in string format
-   * @return the geolocalization that we received by reading the database using the IP address
+   * @return the geolocalization that we received by reading the webservice using the IP address
    */
   public Geolocation getGeolocalization(String ip) throws IOException, GeoIp2Exception {
     logger.info("fetching entity with the following ip: " + ip);
 
     InetAddress inetAddress = InetAddress.getByName(ip);
-    CityResponse response = reader.city(inetAddress);
+    CityResponse response = client.city(inetAddress);
     Country country = response.getCountry();
     Subdivision subdivision = response.getMostSpecificSubdivision();
     Postal postal = response.getPostal();

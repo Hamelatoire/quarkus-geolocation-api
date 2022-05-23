@@ -13,8 +13,8 @@ public class CustomExceptionHandler implements ExceptionMapper<CustomException> 
   @Override
   public Response toResponse(CustomException e) {
     switch (e.getMessage()) {
-      case CustomExceptionCodes.LOADING_DATABASE_INTO_MEMORY_FAILED:
-      case CustomExceptionCodes.ERROR_WHILE_READING_DATABASE:
+      case CustomExceptionCodes.IO_ERROR_WHILE_USING_THE_WEB_SERVICE:
+      case CustomExceptionCodes.ERROR_WHILE_USING_THE_WEB_SERVICE:
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
             .entity(new ErrorMessage(e.getMessage(), false))
             .build();
