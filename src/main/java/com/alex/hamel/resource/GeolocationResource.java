@@ -51,7 +51,7 @@ public class GeolocationResource {
       description = CustomExceptionCodes.ERROR_WHILE_USING_THE_WEB_SERVICE)
   public Response getGeolocation(@PathParam("ip") String ip) {
     this.validateIP(ip);
-    Geolocation geolocation = null;
+    Geolocation geolocation;
     try {
       geolocation = geolocationService.getGeolocalization(ip);
     } catch (IOException e) {
@@ -76,7 +76,7 @@ public class GeolocationResource {
       description = CustomExceptionCodes.ERROR_WHILE_USING_THE_WEB_SERVICE)
   public Response getGeolocations(List<String> ipList) {
     ipList.forEach(this::validateIP);
-    List<Geolocation> geolocationList = null;
+    List<Geolocation> geolocationList;
     geolocationList = geolocationService.batchGetGeolocalization(ipList);
     return Response.status(Response.Status.OK).entity(geolocationList).build();
   }
