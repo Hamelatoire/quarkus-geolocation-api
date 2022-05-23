@@ -1,0 +1,11 @@
+version: "1"
+
+services:
+  geolocation-service:
+    build:
+      context: .
+      dockerfile: src/main/docker/Dockerfile.jvm
+    image: registry.access.redhat.com/ubi8/openjdk-11:1.11
+    mem_limit: 300m
+    ports:
+      - "8080:8080"

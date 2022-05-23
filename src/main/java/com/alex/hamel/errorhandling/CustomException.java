@@ -1,14 +1,13 @@
 package com.alex.hamel.errorhandling;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.io.Serializable;
 
 /**
  * Class that is used to for error handling
  * https://stackoverflow.com/questions/60008540/quarkus-exception-handler
  */
 @ApplicationScoped
-public class CustomException extends RuntimeException implements Serializable {
+public class CustomException extends RuntimeException {
   private static final long serialVersionUID = 1L;
 
   public CustomException() {}
