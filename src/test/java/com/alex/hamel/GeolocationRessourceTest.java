@@ -75,9 +75,9 @@ class GeolocationRessourceTest {
             //            "[0].subdivision",
             //            is("Ontario"),
             "[1].ip",
-            is("103.59.72.103"));
-    //            "[1].country",
-    //            is("India"),
+            is("103.59.72.103"),
+            "[1].country",
+            is("India"));
     //            "[1].subdivision",
     //            is("West Bengal"));
   }
